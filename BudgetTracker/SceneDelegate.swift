@@ -1,8 +1,5 @@
 //
-//  SceneDelegate.swift
-//  BudgetTracker
-//
-//  Created by macbook on 01.11.2022.
+// BudgetTracker
 //
 
 import UIKit
@@ -25,6 +22,4 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
     }
 
-
 }
-

@@ -14,6 +14,7 @@
 		FA6C89F82911BE2000FE19C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA6C89F72911BE2000FE19C9 /* Assets.xcassets */; };
 		FA6C89FB2911BE2000FE19C9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA6C89F92911BE2000FE19C9 /* LaunchScreen.storyboard */; };
 		FA6C8A072911D61500FE19C9 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6C8A062911D61500FE19C9 /* MainView.swift */; };
+		FAF787DE2912D91F00144B7D /* ContentControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF787DD2912D91F00144B7D /* ContentControllerProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		FA6C89FA2911BE2000FE19C9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FA6C89FC2911BE2000FE19C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA6C8A062911D61500FE19C9 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		FAF787DD2912D91F00144B7D /* ContentControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentControllerProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 		FA6C89EA2911BE1D00FE19C9 /* BudgetTracker */ = {
 			isa = PBXGroup;
 			children = (
+				FAF787DC2912D8FF00144B7D /* UIHelpers */,
 				FA6C89EB2911BE1D00FE19C9 /* AppDelegate.swift */,
 				FA6C89ED2911BE1D00FE19C9 /* SceneDelegate.swift */,
 				FA6C8A052911D5F100FE19C9 /* MainViewController  */,
@@ -76,6 +79,14 @@
 				FA6C8A062911D61500FE19C9 /* MainView.swift */,
 			);
 			path = "MainViewController ";
+			sourceTree = "<group>";
+		};
+		FAF787DC2912D8FF00144B7D /* UIHelpers */ = {
+			isa = PBXGroup;
+			children = (
+				FAF787DD2912D91F00144B7D /* ContentControllerProtocol.swift */,
+			);
+			path = UIHelpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -171,6 +182,7 @@
 			files = (
 				FA6C89F02911BE1D00FE19C9 /* MainViewController.swift in Sources */,
 				FA6C89F62911BE1D00FE19C9 /* BudgetTracker.xcdatamodeld in Sources */,
+				FAF787DE2912D91F00144B7D /* ContentControllerProtocol.swift in Sources */,
 				FA6C89EC2911BE1D00FE19C9 /* AppDelegate.swift in Sources */,
 				FA6C8A072911D61500FE19C9 /* MainView.swift in Sources */,
 				FA6C89EE2911BE1D00FE19C9 /* SceneDelegate.swift in Sources */,
