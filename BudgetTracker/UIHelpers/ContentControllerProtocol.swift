@@ -4,7 +4,6 @@
 
 import UIKit
 
-
 public protocol ContentControllerProtocol: AnyObject {
 
     associatedtype View: UIView

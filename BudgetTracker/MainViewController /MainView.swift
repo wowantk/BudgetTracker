@@ -55,9 +55,13 @@ internal final class MainView: UIView {
             of: "^[0-9.]*$",
             options: .regularExpression) != nil
     }
+
+    func update(user: User) {
+        balanceLabel.text = "\(user.balance)"
+    }
 }
 
-//MARK: -UIFactory
+// MARK: - UIFactory
 private extension MainView {
 
     private func addAllSubviews() {
@@ -106,7 +110,7 @@ private extension MainView {
     }
 }
 
-//MARK: -Constrains
+// MARK: - Constrains
 
 private extension MainView {
 
