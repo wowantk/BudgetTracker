@@ -13,10 +13,11 @@ internal protocol MainViewDelegate: AnyObject {
 
 internal final class MainView: UIView {
 
-    private let mainImage: UIImageView = makeImageView()
+    private let currencyLabel: UILabel = makeLabel()
     private let balanceLabel: UILabel = makeLabel()
     private let addTransactions: UIButton = makeButton(buttonText: "Add Transactions")
     private let addRefill: UIButton = makeAddReffilbutton()
+    private let tableView: UITableView = makeTableView()
 
     weak var delegate: MainViewDelegate?
 
@@ -25,6 +26,9 @@ internal final class MainView: UIView {
         backgroundColor = .white
         addAllSubviews()
         setAllConstrains()
+        tableView.delegate = self
+        tableView.dataSource = self
+        currencyLabel.text = "Hello"
         addTransactions.addTarget(self, action: #selector(handleAddTransactions), for: .touchUpInside)
         addRefill.addTarget(self, action: #selector(handleAddRefill), for: .touchUpInside)
     }
@@ -61,11 +65,28 @@ internal final class MainView: UIView {
     }
 }
 
+// MARK: - TableViewDelegate
+extension MainView: UITableViewDelegate {
+
+}
+
+// MARK: - TableViewDataSource
+extension MainView: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return UITableViewCell()
+    }
+
+}
+
 // MARK: - UIFactory
 private extension MainView {
 
     private func addAllSubviews() {
-        [mainImage, balanceLabel, addTransactions, addRefill]
+        [currencyLabel, balanceLabel, addTransactions, addRefill, tableView]
             .forEach(addSubview(_:))
     }
 
@@ -101,12 +122,22 @@ private extension MainView {
         let label = UILabel()
         label.textAlignment = .center
         label.layer.cornerRadius = 5
-        label.backgroundColor = .red
+        label.backgroundColor = .clear
         label.clipsToBounds = true
         label.layer.borderColor = UIColor.black.cgColor
         label.layer.borderWidth = 0.5
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
+    }
+    
+    private static func makeTableView() -> UITableView {
+        let tableView = UITableView()
+        tableView.backgroundColor = .clear
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.separatorStyle = .singleLine
+        tableView.allowsSelection = false
+        tableView.register(cell: TransactionCell.self)
+        return tableView
     }
 }
 
@@ -115,28 +146,28 @@ private extension MainView {
 private extension MainView {
 
     private func setAllConstrains() {
+        setCurrencyLabelConstrains()
         setAddReffilConstrains()
         setLabelConstrains()
-        setImageConstrains()
         setAddTransactionsButtonConstrains()
+        setTableViewConstrains()
     }
 
-    private func setImageConstrains() {
-        mainImage.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
-        mainImage.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 50).isActive = true
-        mainImage.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -50).isActive = true
-        mainImage.bottomAnchor.constraint(equalTo: balanceLabel.topAnchor, constant: -20).isActive = true
+    private func setCurrencyLabelConstrains() {
+        currencyLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor).isActive = true
+        currencyLabel.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 30).isActive = true
+        currencyLabel.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -30).isActive = true
     }
 
     private func setAddReffilConstrains() {
-        addRefill.topAnchor.constraint(equalTo: mainImage.bottomAnchor, constant: 20).isActive = true
+        addRefill.topAnchor.constraint(equalTo: currencyLabel.bottomAnchor, constant: 5).isActive = true
         addRefill.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -30).isActive = true
         addRefill.heightAnchor.constraint(equalToConstant: 60).isActive = true
         addRefill.widthAnchor.constraint(equalToConstant: 60).isActive = true
     }
 
     private func setLabelConstrains() {
-        balanceLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        balanceLabel.topAnchor.constraint(equalTo: currencyLabel.bottomAnchor, constant: 5).isActive = true
         balanceLabel.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 30).isActive = true
         balanceLabel.heightAnchor.constraint(equalToConstant: 60).isActive = true
         balanceLabel.rightAnchor.constraint(equalTo: addRefill.leftAnchor, constant: -5).isActive = true
@@ -147,6 +178,13 @@ private extension MainView {
         addTransactions.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 30).isActive = true
         addTransactions.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -30).isActive = true
         addTransactions.heightAnchor.constraint(equalToConstant: 60).isActive = true
+    }
+    
+    private func setTableViewConstrains() {
+        tableView.topAnchor.constraint(equalTo: addTransactions.bottomAnchor, constant: 5).isActive = true
+        tableView.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor).isActive = true
+        tableView.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     }
 
 }
