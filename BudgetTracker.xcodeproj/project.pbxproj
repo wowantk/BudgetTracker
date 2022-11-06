@@ -20,6 +20,8 @@
 		FAF787E72915B92F00144B7D /* SpendingObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF787E62915B92F00144B7D /* SpendingObject.swift */; };
 		FAF787E92915B93900144B7D /* UserObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF787E82915B93900144B7D /* UserObject.swift */; };
 		FAF787EB2915C0C700144B7D /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF787EA2915C0C700144B7D /* CoreDataManager.swift */; };
+		FAF787EE2918133A00144B7D /* TransactionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF787ED2918133A00144B7D /* TransactionCell.swift */; };
+		FAF787F02918229D00144B7D /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF787EF2918229D00144B7D /* ReusableView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +40,8 @@
 		FAF787E62915B92F00144B7D /* SpendingObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendingObject.swift; sourceTree = "<group>"; };
 		FAF787E82915B93900144B7D /* UserObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserObject.swift; sourceTree = "<group>"; };
 		FAF787EA2915C0C700144B7D /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		FAF787ED2918133A00144B7D /* TransactionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionCell.swift; sourceTree = "<group>"; };
+		FAF787EF2918229D00144B7D /* ReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +90,7 @@
 		FA6C8A052911D5F100FE19C9 /* MainViewController  */ = {
 			isa = PBXGroup;
 			children = (
+				FAF787EC2918132900144B7D /* Cell */,
 				FA6C89EF2911BE1D00FE19C9 /* MainViewController.swift */,
 				FA6C8A062911D61500FE19C9 /* MainView.swift */,
 			);
@@ -96,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				FAF787DD2912D91F00144B7D /* ContentControllerProtocol.swift */,
+				FAF787EF2918229D00144B7D /* ReusableView.swift */,
 			);
 			path = UIHelpers;
 			sourceTree = "<group>";
@@ -126,6 +132,14 @@
 				FAF787E82915B93900144B7D /* UserObject.swift */,
 			);
 			path = CoreDataObject;
+			sourceTree = "<group>";
+		};
+		FAF787EC2918132900144B7D /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				FAF787ED2918133A00144B7D /* TransactionCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -210,7 +224,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "
+";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -221,10 +236,12 @@
 			files = (
 				FA6C89F02911BE1D00FE19C9 /* MainViewController.swift in Sources */,
 				FAF787E42915A71D00144B7D /* Spending.swift in Sources */,
+				FAF787EE2918133A00144B7D /* TransactionCell.swift in Sources */,
 				FA6C89F62911BE1D00FE19C9 /* BudgetTracker.xcdatamodeld in Sources */,
 				FAF787EB2915C0C700144B7D /* CoreDataManager.swift in Sources */,
 				FAF787E92915B93900144B7D /* UserObject.swift in Sources */,
 				FAF787DE2912D91F00144B7D /* ContentControllerProtocol.swift in Sources */,
+				FAF787F02918229D00144B7D /* ReusableView.swift in Sources */,
 				FAF787E72915B92F00144B7D /* SpendingObject.swift in Sources */,
 				FA6C89EC2911BE1D00FE19C9 /* AppDelegate.swift in Sources */,
 				FA6C8A072911D61500FE19C9 /* MainView.swift in Sources */,

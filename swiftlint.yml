@@ -1,0 +1,41 @@
+excluded:
+ - Pods
+opt_in_rules:
+ - anyobject_protocol
+ - array_init
+disabled_rules:
+ - no_fallthrough_only
+ - nesting
+ - line_length
+ - large_tuple
+ - todo
+ - notification_center_detachment
+ - file_length
+ - type_body_length
+ - opening_brace
+ - vertical_parameter_alignment
+ - unused_setter_value
+ - type_name
+ - force_cast
+identifier_name:
+ min_length: 1 
+ allowed_symbols: "_"
+ excluded: 
+  - _
+  - DerivedData
+  - .build
+  - .idea
+  - .swiftpm
+type_name:
+ min_length: 1
+custom_rules:
+  comments_space: # From https://github.com/brandenr/swiftlintconfig
+    name: "Space After Comment"
+    regex: '(^ *//\w+)'
+    message: "There should be a space after //"
+    severity: warning
+  multiple_empty_lines:
+     name: "Multiple Empty Lines"
+     regex: '((?:\s*\n){3,})'
+     message: "There are too many line breaks"
+     severity: error
