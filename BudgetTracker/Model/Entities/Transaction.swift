@@ -4,7 +4,7 @@
 
 import Foundation
 
-public protocol Spending {
+public protocol Transaction {
     var type: TypeOfSpend { get }
     var time: Date { get }
     var count: Double { get }

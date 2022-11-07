@@ -7,11 +7,9 @@ import CoreData
 
 public final class CoreDataManger {
 
-    static let sharedManager = CoreDataManger()
-
     private var context: NSManagedObjectContext { persistentContainer.viewContext }
-
-    private init() { }
+    
+    lazy var fetchResultController: NSFetchedResultsController<TransactionsObject> = createNSFetchResultController()
 
     lazy var persistentContainer: NSPersistentContainer = {
           let container = NSPersistentContainer(name: "BudgetTracker")
@@ -35,16 +33,15 @@ public final class CoreDataManger {
             }
         }
 
-    func addTransactions(transactionsType: TypeOfSpend, amount: Double) {
+    func addTransactions(transactionsType: TypeOfSpend, amount: Double) -> Result<Void, Error> {
         let currentUserObject: UserObject?
         do {
             let fetchRequest =  UserObject.fetchRequest()
             currentUserObject = try context.fetch(fetchRequest).first
         } catch {
-            print("Erro")
-            return
+            return .failure(CoreDataError.addTransactionsError)
         }
-        let newTransactions = SpendingObject(context: self.context)
+        let newTransactions = TransactionsObject(context: self.context)
         newTransactions.count = amount
         newTransactions.time = Date()
         newTransactions.type = transactionsType
@@ -52,27 +49,41 @@ public final class CoreDataManger {
         case .earning: currentUserObject?.balance += amount
         default: currentUserObject?.balance -= amount
         }
+        var arrayTransactions = currentUserObject?.spending ?? []
+        arrayTransactions.append(newTransactions)
+        currentUserObject?.pSpending = NSOrderedSet(array: arrayTransactions)
         saveContext()
+        return .success(())
     }
+    
+    private func createNSFetchResultController() -> NSFetchedResultsController<TransactionsObject> {
+        let nameSortDescriptor = NSSortDescriptor(key: "time", ascending: false)
+        let fetch: NSFetchRequest<TransactionsObject> = NSFetchRequest<TransactionsObject>(entityName: "TransactionsObject")
+        fetch.sortDescriptors = [nameSortDescriptor]
+        return .init(fetchRequest: fetch, managedObjectContext: context, sectionNameKeyPath: #keyPath(TransactionsObject.dateDescription), cacheName: nil)
+    }
+    
+    func fetchTransactions() -> Result<Void, Error> {
+        do {
+            try fetchResultController.performFetch()
+            return .success(())
+        } catch {
+            return .failure(CoreDataError.performFetchError)
+        }
+        
+    }
+    
+    
 
-//    func fetchTransactions() -> [Spending] {
-//        let fetchRequest = NSFetchRequest<SpendingObject>(entityName: "SpendingObject")
-//        fetchRequest.fetchLimit = 20
-//        let sortByDate = NSSortDescriptor(key: #keyPath(SpendingObject.time), ascending: false)
-//        do context.fetch(fetchRequest)
-//    }
-
-    func fetchUser() -> User {
+    func fetchUser() -> Result<User, Error> {
         let userObject: UserObject
         let fetchRequest = UserObject.fetchRequest()
         do {
             userObject = try context.fetch(fetchRequest).first ?? UserObject(context: context)
             saveContext()
-            return userObject
+            return .success(userObject)
         } catch {
-            print("ERROR")
-            let user = UserObject(context: context)
-            return user
+            return .failure(CoreDataError.userFetchError)
         }
     }
 

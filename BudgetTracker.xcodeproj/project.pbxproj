@@ -14,10 +14,13 @@
 		FA6C89F82911BE2000FE19C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA6C89F72911BE2000FE19C9 /* Assets.xcassets */; };
 		FA6C89FB2911BE2000FE19C9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA6C89F92911BE2000FE19C9 /* LaunchScreen.storyboard */; };
 		FA6C8A072911D61500FE19C9 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6C8A062911D61500FE19C9 /* MainView.swift */; };
+		FAA644A629198BC300BE2F12 /* ModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA644A529198BC300BE2F12 /* ModelManager.swift */; };
+		FAA644A829198BF300BE2F12 /* ModelManagerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA644A729198BF300BE2F12 /* ModelManagerImpl.swift */; };
+		FAA644AA2919AD4500BE2F12 /* CoreDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA644A92919AD4500BE2F12 /* CoreDataError.swift */; };
 		FAF787DE2912D91F00144B7D /* ContentControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF787DD2912D91F00144B7D /* ContentControllerProtocol.swift */; };
 		FAF787E22915A5B600144B7D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF787E12915A5B600144B7D /* User.swift */; };
-		FAF787E42915A71D00144B7D /* Spending.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF787E32915A71D00144B7D /* Spending.swift */; };
-		FAF787E72915B92F00144B7D /* SpendingObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF787E62915B92F00144B7D /* SpendingObject.swift */; };
+		FAF787E42915A71D00144B7D /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF787E32915A71D00144B7D /* Transaction.swift */; };
+		FAF787E72915B92F00144B7D /* TransactionsObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF787E62915B92F00144B7D /* TransactionsObject.swift */; };
 		FAF787E92915B93900144B7D /* UserObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF787E82915B93900144B7D /* UserObject.swift */; };
 		FAF787EB2915C0C700144B7D /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF787EA2915C0C700144B7D /* CoreDataManager.swift */; };
 		FAF787EE2918133A00144B7D /* TransactionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF787ED2918133A00144B7D /* TransactionCell.swift */; };
@@ -34,10 +37,13 @@
 		FA6C89FA2911BE2000FE19C9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FA6C89FC2911BE2000FE19C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA6C8A062911D61500FE19C9 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		FAA644A529198BC300BE2F12 /* ModelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelManager.swift; sourceTree = "<group>"; };
+		FAA644A729198BF300BE2F12 /* ModelManagerImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelManagerImpl.swift; sourceTree = "<group>"; };
+		FAA644A92919AD4500BE2F12 /* CoreDataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataError.swift; sourceTree = "<group>"; };
 		FAF787DD2912D91F00144B7D /* ContentControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentControllerProtocol.swift; sourceTree = "<group>"; };
 		FAF787E12915A5B600144B7D /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		FAF787E32915A71D00144B7D /* Spending.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spending.swift; sourceTree = "<group>"; };
-		FAF787E62915B92F00144B7D /* SpendingObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendingObject.swift; sourceTree = "<group>"; };
+		FAF787E32915A71D00144B7D /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
+		FAF787E62915B92F00144B7D /* TransactionsObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsObject.swift; sourceTree = "<group>"; };
 		FAF787E82915B93900144B7D /* UserObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserObject.swift; sourceTree = "<group>"; };
 		FAF787EA2915C0C700144B7D /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		FAF787ED2918133A00144B7D /* TransactionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionCell.swift; sourceTree = "<group>"; };
@@ -112,6 +118,9 @@
 				FAF787E52915B82A00144B7D /* CoreDataObject */,
 				FAF787E02915A59D00144B7D /* Entities */,
 				FAF787EA2915C0C700144B7D /* CoreDataManager.swift */,
+				FAA644A529198BC300BE2F12 /* ModelManager.swift */,
+				FAA644A729198BF300BE2F12 /* ModelManagerImpl.swift */,
+				FAA644A92919AD4500BE2F12 /* CoreDataError.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -120,7 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				FAF787E12915A5B600144B7D /* User.swift */,
-				FAF787E32915A71D00144B7D /* Spending.swift */,
+				FAF787E32915A71D00144B7D /* Transaction.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -128,7 +137,7 @@
 		FAF787E52915B82A00144B7D /* CoreDataObject */ = {
 			isa = PBXGroup;
 			children = (
-				FAF787E62915B92F00144B7D /* SpendingObject.swift */,
+				FAF787E62915B92F00144B7D /* TransactionsObject.swift */,
 				FAF787E82915B93900144B7D /* UserObject.swift */,
 			);
 			path = CoreDataObject;
@@ -235,16 +244,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA6C89F02911BE1D00FE19C9 /* MainViewController.swift in Sources */,
-				FAF787E42915A71D00144B7D /* Spending.swift in Sources */,
+				FAF787E42915A71D00144B7D /* Transaction.swift in Sources */,
 				FAF787EE2918133A00144B7D /* TransactionCell.swift in Sources */,
+				FAA644A629198BC300BE2F12 /* ModelManager.swift in Sources */,
 				FA6C89F62911BE1D00FE19C9 /* BudgetTracker.xcdatamodeld in Sources */,
 				FAF787EB2915C0C700144B7D /* CoreDataManager.swift in Sources */,
 				FAF787E92915B93900144B7D /* UserObject.swift in Sources */,
 				FAF787DE2912D91F00144B7D /* ContentControllerProtocol.swift in Sources */,
 				FAF787F02918229D00144B7D /* ReusableView.swift in Sources */,
-				FAF787E72915B92F00144B7D /* SpendingObject.swift in Sources */,
+				FAF787E72915B92F00144B7D /* TransactionsObject.swift in Sources */,
 				FA6C89EC2911BE1D00FE19C9 /* AppDelegate.swift in Sources */,
+				FAA644AA2919AD4500BE2F12 /* CoreDataError.swift in Sources */,
 				FA6C8A072911D61500FE19C9 /* MainView.swift in Sources */,
+				FAA644A829198BF300BE2F12 /* ModelManagerImpl.swift in Sources */,
 				FA6C89EE2911BE1D00FE19C9 /* SceneDelegate.swift in Sources */,
 				FAF787E22915A5B600144B7D /* User.swift in Sources */,
 			);

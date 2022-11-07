@@ -18,7 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneDidEnterBackground(_ scene: UIScene) {
-        CoreDataManger.sharedManager.saveContext()
+        //CoreDataManger.sharedManager.saveContext()
     }
 
 }

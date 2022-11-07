@@ -15,7 +15,7 @@ internal final class UserObject: NSManagedObject, User {
     @NSManaged
     var balance: Double
 
-    var spending: [Spending] { pSpending.array as? [Spending] ?? [] }
+    var spending: [Transaction] { pSpending.array as? [Transaction] ?? [] }
 
     @NSManaged
     var pSpending: NSOrderedSet

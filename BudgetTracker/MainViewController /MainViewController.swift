@@ -7,7 +7,21 @@ import UIKit
 internal final class MainViewController: UIViewController, ContentControllerProtocol {
 
     typealias View = MainView
-
+    
+    private let modelManager: ModelManager = ModelManagerImpl()
+    
+    init() {
+        super.init(nibName: nil, bundle: nil)
+        switch modelManager.performFetchTransactions() {
+        case .success(()): break
+        case .failure(let error): print(error)
+        }
+    }
+    
+    public required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         contentView.delegate = self
@@ -19,7 +33,11 @@ internal final class MainViewController: UIViewController, ContentControllerProt
     }
 
     func update() {
-        contentView.update(user: CoreDataManger.sharedManager.fetchUser())
+        switch modelManager.fetchUser() {
+        case.success(let user): contentView.update(user: user)
+        case .failure(let error): print(error)
+        }
+        
     }
 
 }
@@ -36,8 +54,11 @@ extension MainViewController: MainViewDelegate {
                 // TODO: - show Error
                 return
             }
-            CoreDataManger.sharedManager.addTransactions(transactionsType: .earning, amount: Double(text) ?? 0)
-            self?.update()
+            switch self?.modelManager.addTransactions(transactionsType: .earning, amount: Double(text) ?? 0) {
+            case .success(()): self?.update()
+            case .failure(let error): print(error)
+            case .none: break
+            }
         })
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
         alertController.addAction(addAction)
@@ -47,6 +68,22 @@ extension MainViewController: MainViewDelegate {
 
     func handleAddTransactions(in view: MainView) {
         // TODO: - HandleTransaction
+    }
+    
+    func handleSections() -> Int {
+        modelManager.sections
+    }
+    
+    func handleNameAtSections(at section: Int) -> String {
+        modelManager.sectionsName(at: section)
+    }
+    
+    func handleCountOfRowInSections(at section: Int) -> Int {
+        modelManager.countOfSections(at: section)
+    }
+    
+    func handeCellForRowAt(at indexPath: IndexPath) -> Transaction? {
+        modelManager.getTransactions(at: indexPath)
     }
 
     func handleError() { print("ERROR")}
