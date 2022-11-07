@@ -9,6 +9,10 @@ internal protocol MainViewDelegate: AnyObject {
     func handleAddRefill(in view: MainView, updateView: @escaping (String) -> Void)
     func handleAddTransactions(in view: MainView)
     func handleError()
+    func handleSections() -> Int
+    func handleNameAtSections(at section: Int) -> String
+    func handleCountOfRowInSections(at section: Int) -> Int
+    func handeCellForRowAt(at indexPath: IndexPath) -> Transaction?
 }
 
 internal final class MainView: UIView {
@@ -72,12 +76,25 @@ extension MainView: UITableViewDelegate {
 
 // MARK: - TableViewDataSource
 extension MainView: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return delegate?.handleSections() ?? 0
     }
-
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return delegate?.handleNameAtSections(at: section) ?? ""
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return delegate?.handleCountOfRowInSections(at: section) ?? 0
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        let cell = tableView.dequeueReusable(cell: TransactionCell.self, for: indexPath)
+        guard let transaction: Transaction = delegate?.handeCellForRowAt(at: indexPath) else {
+            return UITableViewCell()
+        }
+        cell.update(model: transaction)
+        return cell
     }
 
 }

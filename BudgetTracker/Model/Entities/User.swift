@@ -6,5 +6,5 @@ import Foundation
 
 public protocol User {
     var balance: Double { get }
-    var spending: [Spending] { get }
+    var spending: [Transaction] { get }
 }

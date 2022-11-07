@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21279" systemVersion="21G115" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="SpendingObject" representedClassName="SpendingObject" syncable="YES">
+    <entity name="TransactionsObject" representedClassName="TransactionsObject" syncable="YES">
         <attribute name="count" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="pType" optional="YES" attributeType="String"/>
         <attribute name="time" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -8,6 +8,6 @@
     </entity>
     <entity name="UserObject" representedClassName="UserObject" syncable="YES">
         <attribute name="balance" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <relationship name="pSpending" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="SpendingObject" inverseName="user" inverseEntity="SpendingObject"/>
+        <relationship name="pSpending" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="TransactionsObject" inverseName="user" inverseEntity="TransactionsObject"/>
     </entity>
 </model>
