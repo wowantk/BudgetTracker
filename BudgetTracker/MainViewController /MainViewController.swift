@@ -3,19 +3,26 @@
 //
 
 import UIKit
+import CoreData
 
 internal final class MainViewController: UIViewController, ContentControllerProtocol {
 
     typealias View = MainView
     
-    private let modelManager: ModelManager = ModelManagerImpl()
+    private let modelManager: ModelManager
     
-    init() {
+    init(modelManager: ModelManager) {
+        self.modelManager = modelManager
         super.init(nibName: nil, bundle: nil)
+        modelManager.setDelegate(delegate: self)
         switch modelManager.performFetchTransactions() {
         case .success(()): break
         case .failure(let error): print(error)
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        update()
     }
     
     public required init?(coder: NSCoder) {
@@ -25,7 +32,6 @@ internal final class MainViewController: UIViewController, ContentControllerProt
     override func viewDidLoad() {
         super.viewDidLoad()
         contentView.delegate = self
-        update()
     }
 
     override func loadView() {
@@ -34,13 +40,68 @@ internal final class MainViewController: UIViewController, ContentControllerProt
 
     func update() {
         switch modelManager.fetchUser() {
-        case.success(let user): contentView.update(user: user)
+        case.success(let user):
+            contentView.update(user: user)
         case .failure(let error): print(error)
         }
         
     }
 
 }
+
+// MARK: - NSFetchResultControllerDelegate
+// TODO: - Create Observer Manager for incapsulate logick of frc
+
+extension MainViewController: NSFetchedResultsControllerDelegate {
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, sectionIndexTitleForSectionName sectionName: String) -> String? {
+        return sectionName
+    }
+    
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        contentView.tableView.beginUpdates()
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
+        switch type {
+        case .insert: contentView.tableView.insertSections(IndexSet(integer: sectionIndex), with: .fade)
+        case .delete: contentView.tableView.deleteSections(IndexSet(integer: sectionIndex), with: .fade)
+        default: return
+        }
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch type {
+        case .insert:
+            if let indexPath = newIndexPath {
+                contentView.tableView.insertRows(at: [indexPath], with: .automatic)
+            }
+        case .delete:
+            if let indexPath = indexPath {
+                guard let transactions = modelManager.getTransactions(at: indexPath) else { break }
+                guard let cell = contentView.tableView.cellForRow(at: indexPath) as? TransactionCell else { break }
+                cell.update(model: transactions)
+            }
+        case .move:
+            if let indexPath = indexPath {
+                contentView.tableView.deleteRows(at: [indexPath], with: .automatic)
+            }
+            if let newIndexPath = newIndexPath {
+                contentView.tableView.insertRows(at: [newIndexPath], with: .automatic)
+            }
+        case .update:
+            if let indexPath = indexPath {
+                contentView.tableView.deleteRows(at: [indexPath], with: .automatic)
+            }
+        @unknown default:
+            fatalError()
+        }
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        contentView.tableView.endUpdates()
+    }
+}
+
 
 // MARK: - MainViewDelegate
 
@@ -67,7 +128,7 @@ extension MainViewController: MainViewDelegate {
     }
 
     func handleAddTransactions(in view: MainView) {
-        // TODO: - HandleTransaction
+        navigationController?.pushViewController(AddingViewController(modelManger: modelManager), animated: true)
     }
     
     func handleSections() -> Int {
@@ -79,11 +140,11 @@ extension MainViewController: MainViewDelegate {
     }
     
     func handleCountOfRowInSections(at section: Int) -> Int {
-        modelManager.countOfSections(at: section)
+         modelManager.countOfSections(at: section)
     }
     
     func handeCellForRowAt(at indexPath: IndexPath) -> Transaction? {
-        modelManager.getTransactions(at: indexPath)
+         modelManager.getTransactions(at: indexPath)
     }
 
     func handleError() { print("ERROR")}

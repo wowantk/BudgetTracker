@@ -3,6 +3,7 @@
 //
 
 import Foundation
+import CoreData
 
 public protocol ModelManager {
     var sections: Int { get }
@@ -12,4 +13,5 @@ public protocol ModelManager {
     func fetchUser() -> Result<User, Error>
     func addTransactions(transactionsType: TypeOfSpend, amount: Double) -> Result<Void, Error>
     func performFetchTransactions() -> Result<Void, Error>
+    func setDelegate(delegate: NSFetchedResultsControllerDelegate)
 }

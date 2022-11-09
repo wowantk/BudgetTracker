@@ -21,7 +21,7 @@ internal final class MainView: UIView {
     private let balanceLabel: UILabel = makeLabel()
     private let addTransactions: UIButton = makeButton(buttonText: "Add Transactions")
     private let addRefill: UIButton = makeAddReffilbutton()
-    private let tableView: UITableView = makeTableView()
+    let tableView: UITableView = makeTableView()
 
     weak var delegate: MainViewDelegate?
 
@@ -45,7 +45,7 @@ internal final class MainView: UIView {
     private func handleAddRefill() {
         delegate?.handleAddRefill(in: self, updateView: { [weak self] text in
             guard let self = self else { return }
-            if self.isDecimalNumbers(text: text) {
+            if text.isNumber {
                 self.balanceLabel.text = text
             } else {
                 self.delegate?.handleError()
@@ -58,12 +58,6 @@ internal final class MainView: UIView {
         delegate?.handleAddTransactions(in: self)
     }
 
-    private func isDecimalNumbers(text: String) -> Bool {
-        text.range(
-            of: "^[0-9.]*$",
-            options: .regularExpression) != nil
-    }
-
     func update(user: User) {
         balanceLabel.text = "\(user.balance)"
     }
@@ -71,6 +65,9 @@ internal final class MainView: UIView {
 
 // MARK: - TableViewDelegate
 extension MainView: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
+    }
 
 }
 
@@ -158,8 +155,7 @@ private extension MainView {
     }
 }
 
-// MARK: - Constrains
-
+// MARK: - ConstrainsFactory
 private extension MainView {
 
     private func setAllConstrains() {
