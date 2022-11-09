@@ -6,7 +6,7 @@ import Foundation
 import UIKit
 
 internal protocol AddingContentViewDelegate: AnyObject {
-    func handleSaveButton(in view: AddingContentView, count: String?, type: String?) //
+    func handleSaveButton(in view: AddingContentView, count: String?, type: String?)
 }
 
 public final class AddingContentView: UIView {

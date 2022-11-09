@@ -15,4 +15,5 @@ public protocol ModelManager {
     func performFetchTransactions() -> Result<Void, Error>
     func setDelegate(delegate: NSFetchedResultsControllerDelegate)
     func saveContext()
+    func loadCurrency() async throws -> Currency
 }

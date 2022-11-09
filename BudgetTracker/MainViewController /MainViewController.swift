@@ -14,10 +14,11 @@ internal final class MainViewController: UIViewController, ContentControllerProt
     init(modelManager: ModelManager) {
         self.modelManager = modelManager
         super.init(nibName: nil, bundle: nil)
+        setupHandlerBackground()
         modelManager.setDelegate(delegate: self)
         switch modelManager.performFetchTransactions() {
         case .success(()): break
-        case .failure(let error): print(error)
+        case .failure(let error): showAlert(withMessage: error.localizedDescription)
         }
     }
     
@@ -42,9 +43,24 @@ internal final class MainViewController: UIViewController, ContentControllerProt
         switch modelManager.fetchUser() {
         case.success(let user):
             contentView.update(user: user)
-        case .failure(let error): print(error)
+        case .failure(let error): showAlert(withMessage: error.localizedDescription)
         }
-        
+    }
+    
+    @objc
+    private func loadCurrency() {
+        Task {
+            do {
+                let currency = try await modelManager.loadCurrency()
+                contentView.update(currency: currency)
+            } catch {
+                showAlert(withMessage: error.localizedDescription)
+            }
+        }
+    }
+    
+    private func setupHandlerBackground() {
+        NotificationCenter.default.addObserver(self, selector: #selector(loadCurrency) , name:  UIApplication.didBecomeActiveNotification, object: nil)
     }
 
 }
@@ -107,18 +123,18 @@ extension MainViewController: NSFetchedResultsControllerDelegate {
 
 extension MainViewController: MainViewDelegate {
 
-    func handleAddRefill(in view: MainView, updateView: @escaping (String) -> Void) {
+    func handleAddRefill(in view: MainView) {
         let alertController = UIAlertController(title: "Add Bitcoin", message: nil, preferredStyle: .alert)
         alertController.addTextField()
         alertController.textFields?[0].keyboardType = .numbersAndPunctuation
         let addAction = UIAlertAction(title: "Add", style: .default, handler: { [unowned alertController, weak self] _ in
-            guard let text =  alertController.textFields?[0].text else {
-                // TODO: - show Error
+            guard let text =  alertController.textFields?[0].text, text.isNumber else {
+                self?.showAlert(withMessage: "Please write only number")
                 return
             }
             switch self?.modelManager.addTransactions(transactionsType: .earning, amount: Double(text) ?? 0) {
             case .success(()): self?.update()
-            case .failure(let error): print(error)
+            case .failure(let error): self?.showAlert(withMessage: error.localizedDescription)
             case .none: break
             }
         })
@@ -147,6 +163,4 @@ extension MainViewController: MainViewDelegate {
     func handeCellForRowAt(at indexPath: IndexPath) -> Transaction? {
          modelManager.getTransactions(at: indexPath)
     }
-
-    func handleError() { print("ERROR")}
 }

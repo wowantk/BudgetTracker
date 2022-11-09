@@ -6,8 +6,13 @@ import CoreData
 
 public class ModelManagerImpl: ModelManager {
     
-    private let coreDataManager: CoreDataManger = CoreDataManger()
+    private let coreDataManager: CoreDataManger
+    private let networkManager: NetworManager
     
+    public init(coreDataManager: CoreDataManger, networkManager: NetworManager) {
+        self.coreDataManager = coreDataManager
+        self.networkManager = networkManager
+    }
     
     public var sections: Int {
         coreDataManager.fetchResultController.sections?.count ?? 0 
@@ -43,6 +48,10 @@ public class ModelManagerImpl: ModelManager {
 
     public func saveContext() {
         coreDataManager.saveContext()
+    }
+    
+    public func loadCurrency() async throws -> Currency {
+        try await networkManager.loadItems()
     }
 
 }

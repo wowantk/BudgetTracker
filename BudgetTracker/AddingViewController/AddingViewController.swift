@@ -35,15 +35,15 @@ public final class AddingViewController: UIViewController, ContentControllerProt
 extension AddingViewController:  AddingContentViewDelegate {
     
     func handleSaveButton(in view: AddingContentView, count: String?, type: String?) {
-        guard let count = count, let type = type else {
-            //TODO: Show Error
+        guard let count = count, let type = type, count.isNumber else {
+            showAlert(withMessage: "You should write only numbers")
             return 
         }
         let typeOfSpend: TypeOfSpend = TypeOfSpend(rawValue: type) ?? .other
         let countSpend: Double = count.isNumber ? Double(count) ?? 0 : 0
         switch modelManger.addTransactions(transactionsType: typeOfSpend, amount: countSpend) {
         case .success(()): navigationController?.popViewController(animated: true)
-        case .failure(let error): print("error")
+        case .failure(let error): showAlert(withMessage: error.localizedDescription)
         }
     }
     
