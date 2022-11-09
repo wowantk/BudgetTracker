@@ -6,9 +6,8 @@ import UIKit
 import Foundation
 
 internal protocol MainViewDelegate: AnyObject {
-    func handleAddRefill(in view: MainView, updateView: @escaping (String) -> Void)
+    func handleAddRefill(in view: MainView)
     func handleAddTransactions(in view: MainView)
-    func handleError()
     func handleSections() -> Int
     func handleNameAtSections(at section: Int) -> String
     func handleCountOfRowInSections(at section: Int) -> Int
@@ -32,7 +31,6 @@ internal final class MainView: UIView {
         setAllConstrains()
         tableView.delegate = self
         tableView.dataSource = self
-        currencyLabel.text = "Hello"
         addTransactions.addTarget(self, action: #selector(handleAddTransactions), for: .touchUpInside)
         addRefill.addTarget(self, action: #selector(handleAddRefill), for: .touchUpInside)
     }
@@ -43,14 +41,7 @@ internal final class MainView: UIView {
 
     @objc
     private func handleAddRefill() {
-        delegate?.handleAddRefill(in: self, updateView: { [weak self] text in
-            guard let self = self else { return }
-            if text.isNumber {
-                self.balanceLabel.text = text
-            } else {
-                self.delegate?.handleError()
-            }
-        })
+        delegate?.handleAddRefill(in: self)
     }
 
     @objc
@@ -60,6 +51,10 @@ internal final class MainView: UIView {
 
     func update(user: User) {
         balanceLabel.text = "\(user.balance)"
+    }
+    
+    func update(currency: Currency) {
+        currencyLabel.text = "\(currency.rate)"
     }
 }
 
@@ -102,14 +97,6 @@ private extension MainView {
     private func addAllSubviews() {
         [currencyLabel, balanceLabel, addTransactions, addRefill, tableView]
             .forEach(addSubview(_:))
-    }
-
-    private static func makeImageView() -> UIImageView {
-        let image = UIImage(named: "bitcoinLogo")
-        let imageView = UIImageView(image: image)
-        imageView.contentMode = .scaleAspectFit
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
     }
 
     private static func makeButton(buttonText: String) -> UIButton {

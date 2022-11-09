@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA1C19BB291C131E00F2FE20 /* CurrencyDecodableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1C19BA291C131E00F2FE20 /* CurrencyDecodableObject.swift */; };
+		FA1C19BD291C15D300F2FE20 /* NetworManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1C19BC291C15D300F2FE20 /* NetworManager.swift */; };
+		FA1C19BF291C183A00F2FE20 /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1C19BE291C183A00F2FE20 /* Currency.swift */; };
+		FA1C19C1291C1A1D00F2FE20 /* NetworManagerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1C19C0291C1A1D00F2FE20 /* NetworManagerImpl.swift */; };
 		FA6C89EC2911BE1D00FE19C9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6C89EB2911BE1D00FE19C9 /* AppDelegate.swift */; };
 		FA6C89EE2911BE1D00FE19C9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6C89ED2911BE1D00FE19C9 /* SceneDelegate.swift */; };
 		FA6C89F02911BE1D00FE19C9 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6C89EF2911BE1D00FE19C9 /* MainViewController.swift */; };
@@ -30,6 +34,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FA1C19BA291C131E00F2FE20 /* CurrencyDecodableObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyDecodableObject.swift; sourceTree = "<group>"; };
+		FA1C19BC291C15D300F2FE20 /* NetworManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworManager.swift; sourceTree = "<group>"; };
+		FA1C19BE291C183A00F2FE20 /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
+		FA1C19C0291C1A1D00F2FE20 /* NetworManagerImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworManagerImpl.swift; sourceTree = "<group>"; };
 		FA6C89E82911BE1D00FE19C9 /* BudgetTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BudgetTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA6C89EB2911BE1D00FE19C9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FA6C89ED2911BE1D00FE19C9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -65,6 +73,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FA1C19B7291C10F400F2FE20 /* NetworkLayer */ = {
+			isa = PBXGroup;
+			children = (
+				FA1C19BA291C131E00F2FE20 /* CurrencyDecodableObject.swift */,
+				FA1C19BC291C15D300F2FE20 /* NetworManager.swift */,
+				FA1C19C0291C1A1D00F2FE20 /* NetworManagerImpl.swift */,
+			);
+			path = NetworkLayer;
+			sourceTree = "<group>";
+		};
+		FA1C19B9291C110500F2FE20 /* DatabaseLayer */ = {
+			isa = PBXGroup;
+			children = (
+				FAF787EA2915C0C700144B7D /* CoreDataManager.swift */,
+				FAA644A92919AD4500BE2F12 /* CoreDataError.swift */,
+				FAF787E52915B82A00144B7D /* CoreDataObject */,
+			);
+			path = DatabaseLayer;
+			sourceTree = "<group>";
+		};
 		FA6C89DF2911BE1D00FE19C9 = {
 			isa = PBXGroup;
 			children = (
@@ -129,12 +157,11 @@
 		FAF787DF2915A04E00144B7D /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				FAF787E52915B82A00144B7D /* CoreDataObject */,
+				FA1C19B7291C10F400F2FE20 /* NetworkLayer */,
+				FA1C19B9291C110500F2FE20 /* DatabaseLayer */,
 				FAF787E02915A59D00144B7D /* Entities */,
-				FAF787EA2915C0C700144B7D /* CoreDataManager.swift */,
 				FAA644A529198BC300BE2F12 /* ModelManager.swift */,
 				FAA644A729198BF300BE2F12 /* ModelManagerImpl.swift */,
-				FAA644A92919AD4500BE2F12 /* CoreDataError.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -144,6 +171,7 @@
 			children = (
 				FAF787E12915A5B600144B7D /* User.swift */,
 				FAF787E32915A71D00144B7D /* Transaction.swift */,
+				FA1C19BE291C183A00F2FE20 /* Currency.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -257,13 +285,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA1C19BB291C131E00F2FE20 /* CurrencyDecodableObject.swift in Sources */,
 				FAA644AD2919C96000BE2F12 /* AddingViewController.swift in Sources */,
 				FA6C89F02911BE1D00FE19C9 /* MainViewController.swift in Sources */,
 				FAF787E42915A71D00144B7D /* Transaction.swift in Sources */,
+				FA1C19C1291C1A1D00F2FE20 /* NetworManagerImpl.swift in Sources */,
 				FAA644AF2919CA4000BE2F12 /* AddingContentView.swift in Sources */,
 				FAF787EE2918133A00144B7D /* TransactionCell.swift in Sources */,
 				FAA644A629198BC300BE2F12 /* ModelManager.swift in Sources */,
 				FA6C89F62911BE1D00FE19C9 /* BudgetTracker.xcdatamodeld in Sources */,
+				FA1C19BD291C15D300F2FE20 /* NetworManager.swift in Sources */,
 				FAF787EB2915C0C700144B7D /* CoreDataManager.swift in Sources */,
 				FAF787E92915B93900144B7D /* UserObject.swift in Sources */,
 				FAF787DE2912D91F00144B7D /* ContentControllerProtocol.swift in Sources */,
@@ -271,6 +302,7 @@
 				FAF787E72915B92F00144B7D /* TransactionsObject.swift in Sources */,
 				FA6C89EC2911BE1D00FE19C9 /* AppDelegate.swift in Sources */,
 				FAA644AA2919AD4500BE2F12 /* CoreDataError.swift in Sources */,
+				FA1C19BF291C183A00F2FE20 /* Currency.swift in Sources */,
 				FA6C8A072911D61500FE19C9 /* MainView.swift in Sources */,
 				FAA644A829198BF300BE2F12 /* ModelManagerImpl.swift in Sources */,
 				FA6C89EE2911BE1D00FE19C9 /* SceneDelegate.swift in Sources */,
