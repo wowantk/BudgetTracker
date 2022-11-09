@@ -5,7 +5,7 @@ import Foundation
 import CoreData
 
 public class ModelManagerImpl: ModelManager {
-
+    
     private let coreDataManager: CoreDataManger = CoreDataManger()
     
     
@@ -39,6 +39,10 @@ public class ModelManagerImpl: ModelManager {
     
     public func setDelegate(delegate: NSFetchedResultsControllerDelegate) {
         coreDataManager.setDelegate(delegate: delegate)
+    }
+
+    public func saveContext() {
+        coreDataManager.saveContext()
     }
 
 }

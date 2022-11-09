@@ -59,8 +59,7 @@ public final class CoreDataManger {
     private func createNSFetchResultController() -> NSFetchedResultsController<TransactionsObject> {
         let nameSortDescriptor = NSSortDescriptor(key: "time", ascending: false)
         let fetch: NSFetchRequest<TransactionsObject> = NSFetchRequest<TransactionsObject>(entityName: "TransactionsObject")
-        fetch.fetchOffset = 0
-        fetch.fetchLimit = 20
+        fetch.fetchBatchSize = 20
         fetch.sortDescriptors = [nameSortDescriptor]
         return .init(fetchRequest: fetch, managedObjectContext: context, sectionNameKeyPath: #keyPath(TransactionsObject.dateDescription), cacheName: nil)
     }

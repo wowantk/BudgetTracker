@@ -12,8 +12,9 @@ internal protocol AddingContentViewDelegate: AnyObject {
 public final class AddingContentView: UIView {
     
     private let pickerView: UIPickerView = makePicker()
-    private let depositField: UITextField = makeLabel()
-    private let typeOfTransactionsField: UITextField = makeLabel()
+    private let depositField: UITextField = makeField()
+    private let typeOfTransactionsField: UITextField =
+    makeField()
     private let buttonSave: UIButton = makeButton(buttonText: "Save")
     
     weak var delegate: AddingContentViewDelegate?
@@ -55,8 +56,9 @@ private extension AddingContentView {
             .forEach({ addSubview($0) })
     }
     
-    private static func makeLabel() -> UITextField {
+    private static func makeField() -> UITextField {
         let field = UITextField()
+        field.keyboardType = .numbersAndPunctuation
         field.translatesAutoresizingMaskIntoConstraints = false
         field.layer.borderColor = UIColor.black.cgColor
         field.layer.borderWidth = 1
