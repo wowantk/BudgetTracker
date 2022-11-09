@@ -62,6 +62,13 @@ internal final class MainViewController: UIViewController, ContentControllerProt
     private func setupHandlerBackground() {
         NotificationCenter.default.addObserver(self, selector: #selector(loadCurrency) , name:  UIApplication.didBecomeActiveNotification, object: nil)
     }
+    
+    private func addTransactions(transactionsType: TypeOfSpend = .earning, amount: String) {
+        switch self.modelManager.addTransactions(transactionsType: .earning, amount: Double(amount) ?? 0) {
+        case .success(()): update()
+        case .failure(let error): showAlert(withMessage: error.localizedDescription)
+        }
+    }
 
 }
 
@@ -132,11 +139,7 @@ extension MainViewController: MainViewDelegate {
                 self?.showAlert(withMessage: "Please write only number")
                 return
             }
-            switch self?.modelManager.addTransactions(transactionsType: .earning, amount: Double(text) ?? 0) {
-            case .success(()): self?.update()
-            case .failure(let error): self?.showAlert(withMessage: error.localizedDescription)
-            case .none: break
-            }
+            self?.addTransactions(amount: text)
         })
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
         alertController.addAction(addAction)

@@ -27,7 +27,7 @@ public enum NetworkError: LocalizedError {
     
     public var errorDescription: String? {
         switch self {
-        case .badUrl: return "You have entered bad URL"
+        case .badUrl: return "Some problem with URL Service"
         }
     }
 }

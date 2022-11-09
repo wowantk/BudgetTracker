@@ -4,12 +4,10 @@
 
 import Foundation
 
-// MARK: - Welcome
 internal struct CurrencyDecodableObject: Codable {
     let bpi: Bpi
 }
 
-// MARK: - Bpi
 internal struct Bpi: Codable {
     let usd: USD
 
@@ -18,7 +16,6 @@ internal struct Bpi: Codable {
     }
 }
 
-// MARK: - USD
 internal struct USD: Codable {
     let rate: String
     let rateFloat: Double

@@ -86,6 +86,7 @@ private extension AddingContentView {
 
 //MARK: - PickerViewDelegate
 extension AddingContentView: UIPickerViewDelegate {
+
     public func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return typeOfTransactionsArrayString[row]
     }
