@@ -21,7 +21,7 @@ public final class CoreDataManger {
           return container
       }()
 
-    func saveContext () {
+    func saveContext() {
             let context = persistentContainer.viewContext
             if context.hasChanges {
                 do {
@@ -59,6 +59,8 @@ public final class CoreDataManger {
     private func createNSFetchResultController() -> NSFetchedResultsController<TransactionsObject> {
         let nameSortDescriptor = NSSortDescriptor(key: "time", ascending: false)
         let fetch: NSFetchRequest<TransactionsObject> = NSFetchRequest<TransactionsObject>(entityName: "TransactionsObject")
+        fetch.fetchOffset = 0
+        fetch.fetchLimit = 20
         fetch.sortDescriptors = [nameSortDescriptor]
         return .init(fetchRequest: fetch, managedObjectContext: context, sectionNameKeyPath: #keyPath(TransactionsObject.dateDescription), cacheName: nil)
     }
@@ -70,11 +72,12 @@ public final class CoreDataManger {
         } catch {
             return .failure(CoreDataError.performFetchError)
         }
-        
     }
     
+    func setDelegate(delegate: NSFetchedResultsControllerDelegate) {
+        fetchResultController.delegate = delegate
+    }
     
-
     func fetchUser() -> Result<User, Error> {
         let userObject: UserObject
         let fetchRequest = UserObject.fetchRequest()

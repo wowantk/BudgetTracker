@@ -2,6 +2,7 @@
 //  ModelManagerImpl.swift
 //
 import Foundation
+import CoreData
 
 public class ModelManagerImpl: ModelManager {
 
@@ -34,6 +35,10 @@ public class ModelManagerImpl: ModelManager {
     
     public func fetchUser() -> Result<User, Error> {
         return coreDataManager.fetchUser()
+    }
+    
+    public func setDelegate(delegate: NSFetchedResultsControllerDelegate) {
+        coreDataManager.setDelegate(delegate: delegate)
     }
 
 }

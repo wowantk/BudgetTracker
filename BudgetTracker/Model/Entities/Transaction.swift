@@ -11,10 +11,10 @@ public protocol Transaction {
 }
 
 public enum TypeOfSpend: String {
-    case groceries
-    case taxi
-    case electronics
-    case restaurant
-    case other
-    case earning
+    case groceries = "Groceries"
+    case taxi = "Taxi"
+    case electronics = "Electronics"
+    case restaurant = "Restaurant"
+    case other = "Other"
+    case earning =  "Earning"
 }
