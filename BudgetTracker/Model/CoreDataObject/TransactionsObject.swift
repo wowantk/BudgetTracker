@@ -27,7 +27,7 @@ internal final class TransactionsObject: NSManagedObject, Transaction {
         let formatter = DateFormatter()
         formatter.dateStyle = .short
         formatter.dateFormat = "MM/dd/yyyy"
-        formatter.timeZone = TimeZone(identifier: "GMT")
+        formatter.timeZone = TimeZone(identifier: "UTC")
         return formatter.string(from: time)
     }
 }

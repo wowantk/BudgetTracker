@@ -50,7 +50,7 @@ internal final class MainViewController: UIViewController, ContentControllerProt
 }
 
 // MARK: - NSFetchResultControllerDelegate
-// TODO: - Create Observer Manager for incapsulate logick of frc
+// TODO: - Create Observer Manager for incapsulate logick of frc(Massive View Controller)
 
 extension MainViewController: NSFetchedResultsControllerDelegate {
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, sectionIndexTitleForSectionName sectionName: String) -> String? {
@@ -110,6 +110,7 @@ extension MainViewController: MainViewDelegate {
     func handleAddRefill(in view: MainView, updateView: @escaping (String) -> Void) {
         let alertController = UIAlertController(title: "Add Bitcoin", message: nil, preferredStyle: .alert)
         alertController.addTextField()
+        alertController.textFields?[0].keyboardType = .numbersAndPunctuation
         let addAction = UIAlertAction(title: "Add", style: .default, handler: { [unowned alertController, weak self] _ in
             guard let text =  alertController.textFields?[0].text else {
                 // TODO: - show Error

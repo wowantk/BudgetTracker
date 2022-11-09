@@ -20,7 +20,15 @@ internal final class TransactionCell: UITableViewCell {
     }
     
     func update(model: Transaction) {
-        label.text = "\(model.count), \(model.time) , \(model.type.rawValue)"
+        label.text = "\(model.count), \(dateFormatter(time: model.time)) , \(model.type.rawValue)"
+    }
+    
+    private func dateFormatter(time: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        formatter.dateFormat = "MMM d, yyyy"
+        formatter.timeZone = TimeZone(identifier: "UTC")
+        return formatter.string(from: time)
     }
 }
 

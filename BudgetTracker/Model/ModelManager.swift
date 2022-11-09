@@ -14,4 +14,5 @@ public protocol ModelManager {
     func addTransactions(transactionsType: TypeOfSpend, amount: Double) -> Result<Void, Error>
     func performFetchTransactions() -> Result<Void, Error>
     func setDelegate(delegate: NSFetchedResultsControllerDelegate)
+    func saveContext()
 }
