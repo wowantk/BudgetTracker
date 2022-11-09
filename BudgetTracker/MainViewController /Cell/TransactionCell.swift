@@ -27,7 +27,7 @@ internal final class TransactionCell: UITableViewCell {
         let formatter = DateFormatter()
         formatter.dateStyle = .short
         formatter.dateFormat = "MMM d, yyyy"
-        formatter.timeZone = TimeZone(identifier: "UTC")
+        formatter.timeZone = TimeZone(identifier: "Europe/Ukraine")
         return formatter.string(from: time)
     }
 }
